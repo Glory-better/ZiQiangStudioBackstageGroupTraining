@@ -1,5 +1,6 @@
 # ZiQiangStudioBackstageGroupTraining
 后台组前期培训任务代码
+## blog代码位置——master分支
 ## 代码仓库:https://github.com/Glory-better/ZiQiangStudioBackstageGroupTraining
 ## 配置(待定)
 ## 部署(待定)
