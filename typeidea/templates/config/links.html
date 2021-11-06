@@ -1,0 +1,47 @@
+{% extends "blog/base.html" %}
+{%block title %}友情链接{% endblock %}
+
+{% block main %}
+<table class="table">
+<thead>
+<tr>
+	<th scope="col">#</th>
+	<th scope="col">名称</th>
+	<th scope="col">网址</th>
+</tr>
+</thead>
+<tbody>
+	{% for link in link_list %}
+		<tr>
+			<th scope="row">{{ forloop.counter }}</th>
+			<td>{{link.title }}</td>
+			<td><a href="{{link.href}}">{{link.href}}</a></td>
+		<tr>
+	{% endfor %}
+</tbody>
+</table>
+<hr/>
+<div class="comment">
+	<form class="form-group" action="comment/" method="POST">
+		{% csrf_token %}
+		<input name="target" type="hiden" value=""{{request.path}}"/>
+		{{comment_form}}
+		<input type="summit" value="写好了!"/>
+	</form>
+	
+	<!--评论列表-->
+	<ul class ="list-group">
+		{% for comment in comment_list %}
+		<li class="lsit-group-item">
+			<div class="nickname">
+				<a href="{{comment.website}}">{{comment.nickname}}</a>
+					<span>{{comment.created_time}}</span>
+			</div>
+			<div class="comment-content">
+				{{comment.content}}
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{ % endblock %}
