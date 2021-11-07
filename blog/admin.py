@@ -21,10 +21,11 @@ class CategoryAdmin(BaseOwnerAdmin):
 	inlines=[PostInline,]
 	
 	def post_count(self,obj):
-		return obj.post_set.count()
+		return obj.post_set.count()	
 		
 	post_count.short_description='文章数量'
-	
+	def __str__(self):
+		return self.name	
 
 class CategoryOwnerFilter(admin.SimpleListFilter):
 	"""自定义过滤器只展示当前用户分类"""
@@ -47,7 +48,9 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 class TagAdmin(BaseOwnerAdmin):
 	list_display=('name','status','created_time')
 	fields=('name','status')
-	
+
+	def __str__(self):
+		return self.name	
 		
 @admin.register(Post,site=custom_site)
 class PostAdmin(admin.ModelAdmin):
@@ -73,6 +76,9 @@ class PostAdmin(admin.ModelAdmin):
 		return format_html('<a href="{}“>编辑</a>',
 		reverse('cus_admin:blog_post_change',args=(obj.id,)))
 	operator.short_description='操作'
+	
+	def __str__(self):
+		return self.name
 	
 	class Media:
 		css={'all':("https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css",),}
